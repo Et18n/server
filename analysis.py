@@ -36,11 +36,18 @@ def analyze():
         return "got ", 200
     else:
         return "SERVER DIES", 400
-
+def sentiment_analyse(sentiment_text):
+            score = SentimentIntensityAnalyzer().polarity_scores(sentiment_text)
+            if score["neg"] > score["pos"]:
+                return "Negative"
+            elif score["neg"] < score["pos"]:
+                return  "Positve"
+            else:
+                return "Neutral"
 
 def alive(text):
     if text:
-
+        
         # data = request.get_data(as_text=True)
         # data = request.get_data(as_text=True)
         # if not data:
@@ -77,6 +84,11 @@ def alive(text):
         print(emotion_list)
         w = Counter(emotion_list)
         print(w)
+        if w=={}:
+            weewoo=sentiment_analyse(cleaned_text)
+            return weewoo.upper()
+        else:
+            return max(w).upper()
 
         fig, ax1 = plt.subplots()
         ax1.bar(w.keys(), w.values())
@@ -84,19 +96,12 @@ def alive(text):
         # plt.savefig('graph.png')
         
 
-        def sentiment_analyse(sentiment_text):
-            score = SentimentIntensityAnalyzer().polarity_scores(sentiment_text)
-            if score["neg"] > score["pos"]:
-                return "Negative"
-            elif score["neg"] < score["pos"]:
-                return  "Positve"
-            else:
-                return "Neutral"
+        
 
-        weewoo=sentiment_analyse(cleaned_text)
+        
         plt.show()
-        return weewoo
+        
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=80)
+    app.run(debug=True, port=80 )
