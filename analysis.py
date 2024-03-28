@@ -26,14 +26,14 @@ CORS(app, origins=["http://localhost:3000","https://miniprojectsem4-3ljc.vercel.
 
 def analyze():
     print(request)
-    body = request.get_json(force=True)
+    #body = request.get_json(force=True)
     if request.method == "POST":
         text = request.get_json()
         result = alive(text["text_analyze"])
         print(text)
         return jsonify(result), 200
     elif request.method == "GET":
-        return "got ", 400
+        return "got ", 200
     else:
         return "SERVER DIES", 400
 
