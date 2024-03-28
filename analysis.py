@@ -64,7 +64,7 @@ def alive(text):
             lemma_words.append(word)
         emotion_list = []
         with open(
-            "C:\\Users\\ethan\\OneDrive\\Desktop\\Programming\\miniprojectsem4\\server\\emotions.txt",
+            "./emotions.txt",
             "r",
         ) as file:
             for line in file:
